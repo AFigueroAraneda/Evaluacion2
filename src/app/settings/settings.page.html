@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>¿Desea poder borrar citas en el inicio?</ion-label>
+    <ion-toggle [(ngModel)]="allowDelete"></ion-toggle>
+  </ion-item>
+
+  <ion-button routerLink="/home" expand="block" color="medium">Volver al inicio</ion-button>
+</ion-content>

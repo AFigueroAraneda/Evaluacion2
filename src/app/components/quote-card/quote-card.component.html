@@ -1,0 +1,13 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ quote.text }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    — {{ quote.author }}
+    <div *ngIf="showDelete" class="acciones">
+      <ion-button color="danger" size="small" (click)="delete.emit(quote.id)">
+        Eliminar
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>

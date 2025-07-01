@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestionar Citas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="agregar(form)">
+    <ion-list>
+      <ion-item>
+        <ion-input
+          placeholder="Frase"
+          [(ngModel)]="nuevaFrase"
+          name="frase"
+          required
+          minlength="5"
+          #frase="ngModel"
+        ></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="frase.invalid && (frase.touched || form.submitted)">
+        La frase debe tener al menos 5 caracteres
+      </ion-note>
+      <ion-item>
+        <ion-input
+          placeholder="Autor"
+          [(ngModel)]="nuevoAutor"
+          name="autor"
+          required
+          minlength="2"
+          #autor="ngModel"
+        ></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="autor.invalid && (autor.touched || form.submitted)">
+        El autor debe tener al menos 2 caracteres
+      </ion-note>
+      <ion-button expand="block" type="submit">Agregar</ion-button>
+    </ion-list>
+  </form>
+
+  <app-quote-card
+    *ngFor="let q of quotes"
+    [quote]="q"
+    [showDelete]="true"
+    (delete)="borrar($event)"
+  ></app-quote-card>
+
+  <ion-button routerLink="/home" expand="block" color="medium">Volver al inicio</ion-button>
+</ion-content>

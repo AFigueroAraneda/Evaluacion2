@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cita Aleatoria</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Solo se dibuja la tarjeta si cita existe -->
+  <app-quote-card
+    *ngIf="cita as q"
+    [quote]="q"
+    [showDelete]="permitirBorrar"
+    (delete)="borrar($event)">
+  </app-quote-card>
+
+  <ion-button expand="block" (click)="obtenerAleatoria()">
+    Otra cita
+  </ion-button>
+
+  <ion-button routerLink="/manage" expand="block">
+    Gestionar citas
+  </ion-button>
+
+  <ion-button routerLink="/settings" expand="block">
+    Configuración
+  </ion-button>
+</ion-content>
