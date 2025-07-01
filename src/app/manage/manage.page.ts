@@ -27,19 +27,26 @@ import { QuoteCardComponent } from '../components/quote-card/quote-card.componen
     QuoteCardComponent,
   ],
 })
+// Página para crear y eliminar citas manualmente
 export class ManagePage {
+  // Contenido de la nueva frase
   nuevaFrase = '';
+  // Autor de la nueva frase
   nuevoAutor = '';
+  // Listado de citas almacenadas
   quotes: Quote[] = [];
 
   constructor(private quotesService: QuotesService) {
+    // Cargar las citas existentes al iniciar
     this.cargarQuotes();
   }
 
+  // Obtiene todas las citas de la base de datos
   private async cargarQuotes(): Promise<void> {
     this.quotes = await this.quotesService.getQuotes();
   }
 
+  // Agrega una nueva cita utilizando los datos del formulario
   async agregar(form: NgForm): Promise<void> {
     if (form.invalid) {
       form.control.markAllAsTouched();
@@ -53,6 +60,7 @@ export class ManagePage {
     await this.cargarQuotes();
   }
 
+  // Elimina una cita existente por id
   async borrar(id: number): Promise<void> {
     await this.quotesService.deleteQuote(id);
     await this.cargarQuotes();

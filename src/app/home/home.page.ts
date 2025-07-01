@@ -22,22 +22,28 @@ import { RouterLink } from '@angular/router';
     RouterLink,
   ],
 })
+// Página de inicio que muestra una cita aleatoria
 export class HomePage {
+  // Cita actual a mostrar en la tarjeta
   cita!: Quote;
 
   constructor(private quotesService: QuotesService, private settings: SettingsService) {
+    // Obtener una cita al crear la página
     this.obtenerAleatoria();
   }
 
+  // Recupera una cita aleatoria desde el servicio
   async obtenerAleatoria(): Promise<void> {
     this.cita = await this.quotesService.getRandomQuote();
   }
 
+  // Elimina la cita indicada y carga otra aleatoria
   async borrar(id: number): Promise<void> {
     await this.quotesService.deleteQuote(id);
     await this.obtenerAleatoria();
   }
 
+  // Indica si se permite mostrar el botón de borrar en la tarjeta
   get permitirBorrar(): boolean {
     return this.settings.getAllowDeleteOnHome();
   }
