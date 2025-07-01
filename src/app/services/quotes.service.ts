@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { CapacitorSQLite, SQLiteConnection, SQLiteDBConnection } from '@capacitor-community/sqlite';
 
+// Servicio que gestiona las citas utilizando SQLite
 export interface Quote {
   id: number;
   text: string;
@@ -22,11 +23,10 @@ export class QuotesService {
   private readonly DB_TABLE_NAME = 'quotes';
   private readonly DB_SQL_TABLAS = `CREATE TABLE IF NOT EXISTS ${this.DB_TABLE_NAME}(id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT NOT NULL, author TEXT NOT NULL);`;
 
-  private initPromise: Promise<void>;
+  // Promesa utilizada para asegurar que la inicialización se complete
+  private initPromise: Promise<void> = Promise.resolve();
 
-  constructor() {
-    this.initPromise = this.iniciarPlugin();
-  }
+  constructor() {}
 
   private async persist(): Promise<void> {
     if (this.plataforma === 'web') {
@@ -59,6 +59,7 @@ export class QuotesService {
     await this.db.open();
   }
 
+  // Inicializa el plugin de SQLite y crea la base de datos si es necesario
   async iniciarPlugin() {
     this.plataforma = Capacitor.getPlatform();
     if (this.plataforma === 'web') {
@@ -88,6 +89,7 @@ export class QuotesService {
     }
   }
 
+  // Garantiza que la base de datos esté lista antes de continuar
   private async ready() {
     await this.initPromise;
   }

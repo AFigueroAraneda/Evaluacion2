@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton } from '@ionic/angular/standalone';
 import { Quote } from '../../services/quotes.service';
 
+// Tarjeta que muestra una cita y permite eliminarla
+
 @Component({
   selector: 'app-quote-card',
   standalone: true,

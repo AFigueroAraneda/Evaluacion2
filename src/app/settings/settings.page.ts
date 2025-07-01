@@ -24,13 +24,16 @@ import { SettingsService } from '../services/settings.service';
     RouterLink,
   ],
 })
+// Página de configuración de la aplicación
 export class SettingsPage {
   constructor(private settingsService: SettingsService) {}
 
+  // Obtiene la preferencia del usuario para permitir borrado en inicio
   get allowDelete(): boolean {
     return this.settingsService.getAllowDeleteOnHome();
   }
 
+  // Actualiza la preferencia del usuario
   set allowDelete(value: boolean) {
     this.settingsService.setAllowDeleteOnHome(value);
   }
